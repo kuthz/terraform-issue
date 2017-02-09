@@ -52,7 +52,6 @@ module "lc" {
   ec2_image_id  = "ami-fd6c94eb"
   ec2_user_data = "${data.template_file.userdata.rendered}"
 
-  //iam_instance_profile = "${aws_iam_instance_profile.default.id}"
   security_groups      = "${var.security_group}"
 }
 
