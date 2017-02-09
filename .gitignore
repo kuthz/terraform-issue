@@ -1,0 +1,12 @@
+### Intellij Idea
+*.iml
+*.ipr
+*.iws
+*.idea
+
+### Terraform template
+*.tfstate*
+.terraform
+
+### OS X Files
+.DS_Store

@@ -1,0 +1,28 @@
+coreos:
+  update:
+    reboot-strategy: off
+  units:
+    -
+      name: systemd-journal-gatewayd.socket
+      command: start
+      enable: yes
+    -
+      name: systemd-journal-gatewayd.service
+      command: start
+      enable: yes
+    -
+      name: php.service
+      command: start
+      runtime: true
+      content: |
+        [Unit]
+        Description=Php service {test}
+        After=docker.service
+        [Service]
+        TimeoutStartSec=10m
+        Restart=on-failure
+        RestartSec=30
+        RestartPreventExitStatus=5
+        SyslogIdentifier=php.service
+        ExecStartPre=-/usr/bin/docker rm -f php
+        ExecStart=/usr/bin/docker run --name php -p 80:80 -h=%H php:7.0.15-apache
